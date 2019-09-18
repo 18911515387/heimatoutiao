@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue' // 路由级组件
+import Home from './views/home/' // 路由级组件
 
 Vue.use(Router)
 
