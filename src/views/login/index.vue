@@ -5,8 +5,8 @@
         <img src="../../assets/imgs/logo_index.png">
       </div>
       <el-form ref="myForm" :model="ruleForm" :rules="ruleBank" style="margin-top:15px">
-        <el-form-item prop="phone">
-          <el-input v-model="ruleForm.phone" placeholder='请输入手机号'></el-input>
+        <el-form-item prop="mobile">
+          <el-input v-model="ruleForm.mobile" placeholder='请输入手机号'></el-input>
         </el-form-item>
         <el-form-item prop="code">
           <el-input v-model="ruleForm.code" class="code-i" placeholder='请输入验证码'></el-input>
@@ -37,12 +37,12 @@ export default {
     }
     return {
       ruleForm: {
-        phone: '',
+        mobile: '',
         code: '',
         protocol: false
       },
       ruleBank: {
-        phone: [
+        mobile: [
           { required: true, message: '请输入手机号' },
           { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
         ],
@@ -56,9 +56,17 @@ export default {
   },
   methods: {
     ruleLogin () {
-      this.$refs.myForm.validate(function (ok) {
+      this.$refs.myForm.validate((ok) => {
         if (ok) {
-          console.log('校验完毕')
+          this.$axios({
+            method: 'post',
+            url: '/authorizations',
+            data: this.ruleForm
+          }).then(result => {
+            console.log(result)
+          }).catch(error => {
+            console.log(error)
+          })
         }
       })
     }
