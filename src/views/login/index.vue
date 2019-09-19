@@ -4,21 +4,21 @@
       <div class="title">
         <img src="../../assets/imgs/logo_index.png">
       </div>
-      <el-form ref="" :model="ruleBase" :rules="rules" style="margin-top:15px">
+      <el-form ref="myForm" :model="ruleForm" :rules="ruleBank" style="margin-top:15px">
         <el-form-item prop="phone">
-          <el-input v-model="ruleBase.phone" placeholder='请输入手机号'></el-input>
+          <el-input v-model="ruleForm.phone" placeholder='请输入手机号'></el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <el-input v-model="ruleBase.code" class="code-i" placeholder='请输入验证码'></el-input>
+          <el-input v-model="ruleForm.code" class="code-i" placeholder='请输入验证码'></el-input>
           <el-button type="primary" style="float:right">发送验证码</el-button>
         </el-form-item>
         <el-form-item prop="protocol">
-          <el-checkbox v-model="ruleBase.protocol">
+          <el-checkbox v-model="ruleForm.protocol">
             <span class="protocol">我已阅读并同意<a href="#">用户协议</a>和<a href="#">隐私条款</a> </span>
           </el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" round style="width:100%">登录</el-button>
+          <el-button @click="ruleLogin" type="primary" round style="width:100%">登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -28,18 +28,39 @@
 <script>
 export default {
   data () {
+    let validator = function (rule, value, callback) {
+      if (value) {
+        callback()
+      } else {
+        callback(new Error('请勾选'))
+      }
+    }
     return {
-      ruleBase: {
+      ruleForm: {
         phone: '',
         code: '',
         protocol: false
       },
-      rules: {
+      ruleBank: {
         phone: [
-          { require: true, message: '请输入手机号' },
-          { pattern: /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, messagae: '请输入正确的手机号' }
-        ]
+          { required: true, message: '请输入手机号' },
+          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码' },
+          { pattern: /^\d{6}$/, message: '验证码为6位数字' }
+        ],
+        protocol: [{ validator }]
       }
+    }
+  },
+  methods: {
+    ruleLogin () {
+      this.$refs.myForm.validate(function (ok) {
+        if (ok) {
+          console.log('校验完毕')
+        }
+      })
     }
   }
 }
