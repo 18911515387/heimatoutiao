@@ -56,16 +56,20 @@ export default {
   },
   methods: {
     ruleLogin () {
-      this.$refs.myForm.validate((ok) => {
-        if (ok) {
+      this.$refs.myForm.validate((IsOk) => {
+        if (IsOk) {
           this.$axios({
             method: 'post',
             url: '/authorizations',
             data: this.ruleForm
           }).then(result => {
-            console.log(result)
-          }).catch(error => {
-            console.log(error)
+            window.localStorage.setItem('user-token', result.data.data.token)
+            this.$router.push('/home')
+          }).catch(() => {
+            this.$message({
+              message: '你的手机号或者验证码错误',
+              type: 'warning'
+            })
           })
         }
       })
