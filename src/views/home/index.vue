@@ -1,10 +1,12 @@
 <template>
   <el-container>
-    <el-aside>
-      <let-nav></let-nav>
+    <el-aside style="width:200px">
+      <left-nav></left-nav>
     </el-aside>
     <el-container>
-      <el-headaer>头部</el-headaer>
+      <el-header>
+        <left-head></left-head>
+      </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -14,13 +16,14 @@
 
 <script>
 import leftNav from '../../components/home/left-nav'
+import leftHead from '../../components/home/left-head'
 export default {
   components: {
-    'let-nav': leftNav
+    'left-nav': leftNav,
+    'left-head': leftHead
   }
 }
 </script>
 
 <style>
-
 </style>
