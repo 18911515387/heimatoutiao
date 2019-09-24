@@ -28,18 +28,14 @@
 <script>
 export default {
   data () {
-    let validator = function (rule, value, callback) {
-      if (value) {
-        callback()
-      } else {
-        callback(new Error('请勾选'))
-      }
+    let validator = function (rule, value, callBack) {
+      value ? callBack() : callBack(new Error('您必须同意无条件被我们蒙骗'))
     }
     return {
       ruleForm: {
         mobile: '',
         code: '',
-        protocol: false
+        agree: false
       },
       ruleBank: {
         mobile: [
@@ -50,7 +46,7 @@ export default {
           { required: true, message: '请输入验证码' },
           { pattern: /^\d{6}$/, message: '验证码为6位数字' }
         ],
-        protocol: [{ validator }]
+        agree: [{ validator }]
       }
     }
   },

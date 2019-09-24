@@ -15,13 +15,8 @@
 </template>
 
 <script>
-import leftNav from '../../components/home/left-nav'
-import leftHead from '../../components/home/left-head'
 export default {
-  components: {
-    'left-nav': leftNav,
-    'left-head': leftHead
-  }
+
 }
 </script>
 
