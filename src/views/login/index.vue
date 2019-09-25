@@ -59,7 +59,7 @@ export default {
             url: '/authorizations',
             data: this.ruleForm
           }).then(result => {
-            window.localStorage.setItem('user-token', result.data.data.token)
+            window.localStorage.setItem('user-token', result.data.token)
             this.$router.push('/home')
           }).catch(() => {
             this.$message({

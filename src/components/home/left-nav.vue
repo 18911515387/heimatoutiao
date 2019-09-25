@@ -44,7 +44,6 @@ export default {
 
 <style lang="less" scoped>
 .left-nav {
-  background-color: #323745;
   height: 100vh;
   width: 200px;
   .head-pic {

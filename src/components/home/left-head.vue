@@ -31,14 +31,11 @@ export default {
   },
   methods: {
     getUserInfo () {
-      var token = window.localStorage.getItem('user-token')
-      // console.log(token)
       this.$axios({
-        url: '/user/profile',
-        headers: { Authorization: `Bearer ${token}` }
+        url: '/user/profile'
       }).then(result => {
         // console.log(result)
-        this.userInfo = result.data.data
+        this.userInfo = result.data
       })
     },
     commonClick (parameter) {
